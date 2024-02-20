@@ -1,4 +1,8 @@
 pipeline {
+environment {
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+}
   agent {
     docker {
       image 'maven:latest'
@@ -31,8 +35,8 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
+        //def dockerHome = tool 'myDocker'
+        //env.PATH = "${dockerHome}/bin:${env.PATH}"
         DOCKER_IMAGE = "nandishnandy421/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
