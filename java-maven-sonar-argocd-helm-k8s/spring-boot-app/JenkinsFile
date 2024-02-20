@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'maven:latest'
-      args '-u root --privileged -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's 
+      args '-v /var/run/docker.sock:/var/run/docker.sock --privileged --name jenkins jenkins' // mount Docker socket to access the host's 
     }
   }
   stages {
