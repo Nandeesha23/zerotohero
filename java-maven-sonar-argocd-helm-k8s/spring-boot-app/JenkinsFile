@@ -5,8 +5,13 @@ pipeline {
       args '-u root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's 
     }
   }
-
   stages {
+
+   stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
+
     stage('Checkout') {
       steps {
         sh 'echo passed'
