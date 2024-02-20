@@ -6,14 +6,6 @@ pipeline {
     }
   }
   stages {
-
-   stage('Initialize'){
-        steps {
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-      }
-    }
-
     stage('Checkout') {
       steps {
         sh 'echo passed'
@@ -39,6 +31,8 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
         DOCKER_IMAGE = "nandishnandy421/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
