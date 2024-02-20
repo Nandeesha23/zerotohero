@@ -1,12 +1,8 @@
 pipeline {
   agent {
-    docker {
-      image 'maven:latest'
-      args '-u root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's 
-    }
-  }
-  tools {
-   docker:"myDocker"
+    
+   label="jenkins-agent"
+          
 }
   stages {
     stage('Checkout') {
